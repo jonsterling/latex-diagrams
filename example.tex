@@ -1,0 +1,36 @@
+\documentclass{article}
+\usepackage{amsmath}
+\usepackage{jon-diagrams}
+\usepackage[tt=false]{libertine}
+\usepackage[libertine]{newtxmath}
+
+\usepackage{mflogo}
+
+\title{Modification of Paul Taylor's \texttt{diagrams} package}
+\author{Jon Sterling}
+
+
+\begin{document}
+\maketitle
+
+Through experimentation, I've found that Paul Taulor's \verb|diagrams| package
+produces the best typeset commutative diagrams, but the default arrows leave
+something to be desired. I have written a small \MF{} font to produce a
+superior arrowhead which avoids some minor rendering issues. \emph{Patches with
+further improvements are very welcome.}
+
+\def\Id{{\rm id}}
+\def\Assl{{\rm assl}}%
+
+\begin{figure}[h!]
+  \begin{diagram}
+  U &                                      &                  &       &       \\
+  & \rdTo~{(x,y)}\rdTo(4,2)^x\rdTo(2,4)_y &                  &       &       \\
+  &                                      & X\times_Z\SEpbk Y & \rTo_p &   X   \\
+  &                                      &      \dTo^q      &       & \dTo_f \\
+  &                                      &        Y        & \rTo^g &   Z   \\
+  \end{diagram}
+  \caption{An example diagram.}
+\end{figure}
+
+\end{document}

@@ -1,0 +1,16 @@
+\RequirePackage{graphicx}
+\RequirePackage[silent, nopixel, Postscript]{diagrams}
+
+\makeatletter
+\let\oldCD@t\CD@t
+\def\CD@t{\oldCD@t\baselineskip0pt\relax}
+\makeatother
+\font\jonfont=jon
+\def\rhjonarrow{\mkern-12mu\textrm{\jonfont\symbol{65}}}%%
+\def\lhjonarrow{\jonfont\symbol{65}\mkern-10mu}%%
+\def\dhjonarrow{\mkern1.35mu\rotatebox{270}{$\mkern-15mu\textrm{\jonfont\symbol{65}}$}}
+\def\uhjonarrow{\mkern-1.35mu\rotatebox{90}{$\mkern-15mu\textrm{\jonfont\symbol{65}}$}}
+\newarrowhead{littlevee}\rhjonarrow\lhjonarrow\dhjonarrow\uhjonarrow
+
+\diagramstyle{heads=littlevee}
+
