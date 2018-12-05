@@ -5,7 +5,7 @@ u#:=ff*0.10pt#;
 br#:=108u#; ho#:=100u#; ul#:=32u#; % Breite, Hoehe, Unterlaenge
 define_pixels(u,br,ho,ul);
 
-beginchar(65,120u#,68u#,0);
+beginchar(65,120u#,71u#,0);
 "right arrow";
 z5=(116u,30.7u); z6=(63u,7.2u); z7=(62u,9.2u);
 z8=(90u,30.7u); z9=(62u,51.2u); z10=(63u,53.2u);
