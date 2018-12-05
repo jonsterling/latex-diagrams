@@ -4,11 +4,21 @@
 \usepackage[tt=false]{libertine}
 \usepackage[libertine]{newtxmath}
 
+\usepackage{xparse}
 \usepackage{mflogo}
+
+\ExplSyntaxOn
+\cs_new_eq:NN \Repeat \prg_replicate:nn
+\ExplSyntaxOff
 
 \title{Modification of Paul Taylor's \texttt{diagrams} package}
 \author{Jon Sterling}
 
+
+\makeatletter
+\def\make@pbk#1{\setbox\tw@\hbox to\z@{#1}\ht\tw@\z@\dp\tw@\z@\box\tw@}
+\def\JONpbk{\make@pbk{\kern2em \CD@rH\vrule depth 2.87ex height -2.75ex width 0.95em \vrule height -0.66ex depth 2.87ex width 0.05em \hss}}
+\makeatother
 
 \begin{document}
 \maketitle
@@ -19,16 +29,31 @@ something to be desired. I have written a small \MF{} font to produce a
 superior arrowhead which avoids some minor rendering issues. \emph{Patches with
 further improvements are very welcome.}
 
-\def\Id{{\rm id}}
-\def\Assl{{\rm assl}}%
+\newcounter{IndentLevel}
+\NewDocumentCommand\DBlock{}{
+  \stepcounter{IndentLevel}
+}
+
+\NewDocumentCommand\DRow{m}{
+  \Repeat{\value{IndentLevel}}{&}
+  #1
+  \\
+}
+
+\NewDocumentCommand\Pullback{m m m m m m g g}{
+  \DRow{\JONpbk #1 & \rTo_{#7} & #2}
+  \DRow{\dTo^{#8} & & \dTo_{#5}}
+  \DRow{#3 & \rTo^{#6} & #4}
+}
+
 
 \begin{figure}[h!]
   \begin{diagram}
-  U &                                      &                  &       &       \\
-  & \rdTo~{(x,y)}\rdTo(4,2)^x\rdTo(2,4)_y &                  &       &       \\
-  &                                      & X\times_Z\SEpbk Y & \rTo_p &   X   \\
-  &                                      &      \dTo^q      &       & \dTo_f \\
-  &                                      &        Y        & \rTo^g &   Z   \\
+    \DRow{U}
+    \DBlock
+    \DRow{\rdTo~{(x,y)}\rdTo(4,2)^x\rdTo(2,4)_y}
+    \DBlock
+    \Pullback{X\times_Z Y}{Y}{X}{Z}{f}{g}{p}{q}
   \end{diagram}
   \caption{An example diagram.}
 \end{figure}
