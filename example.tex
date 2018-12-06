@@ -40,7 +40,7 @@ further improvements are very welcome.}
   \\
 }
 
-\NewDocumentCommand\Pullback{m m m m m m g g}{
+\NewDocumentCommand\DPullback{m m m m m m g g}{
   \DRow{\JONpbk #1 & \rTo_{#7} & #2}
   \DRow{\dTo^{#8} & & \dTo_{#5}}
   \DRow{#3 & \rTo^{#6} & #4}
@@ -51,9 +51,9 @@ further improvements are very welcome.}
   \begin{diagram}
     \DRow{U}
     \DBlock
-    \DRow{\rdTo~{(x,y)}\rdTo(4,2)^x\rdTo(2,4)_y}
+    \DRow{\rdDotsto~{(x,y)}\rdTo(4,2)^x\rdTo(2,4)_y}
     \DBlock
-    \Pullback{X\times_Z Y}{Y}{X}{Z}{f}{g}{p}{q}
+    \DPullback{X\times_Z Y}{Y}{X}{Z}{f}{g}{p}{q}
   \end{diagram}
   \caption{An example diagram.}
 \end{figure}
