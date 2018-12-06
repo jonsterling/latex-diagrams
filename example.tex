@@ -20,9 +20,12 @@
 \newdimen{\@JONpbklen}
 \def\make@pbk#1{\setbox\tw@\hbox to\z@{#1}\ht\tw@\z@\dp\tw@\z@\box\tw@}
 \NewDocumentCommand\JONpbk{G{}}{
-  #1
-  \setlength{\@JONpbklen}{\widthof{$#1$}/2 - .3em}
-  \make@pbk{\kern-\@JONpbklen \CD@rH\vrule depth 2.87ex height -2.75ex width 0.95em \vrule height -0.66ex depth 2.87ex width 0.05em \hss}
+  #1%
+  \setlength{\@JONpbklen}{\widthof{$#1$}/2 - .3em}%
+  \make@pbk{%
+    \kern-\@JONpbklen%
+    \vrule depth 2.87ex height -2.75ex width 0.95em \vrule height -0.66ex depth 2.87ex width 0.05em \hss%
+  }%
 }
 \makeatother
 
