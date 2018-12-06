@@ -1,4 +1,5 @@
 \documentclass{article}
+\usepackage{calc}
 \usepackage{amsmath}
 \usepackage{jon-diagrams}
 \usepackage[tt=false]{libertine}
@@ -16,8 +17,13 @@
 
 
 \makeatletter
+\newdimen{\@JONpbklen}
 \def\make@pbk#1{\setbox\tw@\hbox to\z@{#1}\ht\tw@\z@\dp\tw@\z@\box\tw@}
-\def\JONpbk{\make@pbk{\kern2em \CD@rH\vrule depth 2.87ex height -2.75ex width 0.95em \vrule height -0.66ex depth 2.87ex width 0.05em \hss}}
+\NewDocumentCommand\JONpbk{G{}}{
+  #1
+  \setlength{\@JONpbklen}{\widthof{$#1$}/2 - .3em}
+  \make@pbk{\kern-\@JONpbklen \CD@rH\vrule depth 2.87ex height -2.75ex width 0.95em \vrule height -0.66ex depth 2.87ex width 0.05em \hss}
+}
 \makeatother
 
 \begin{document}
@@ -34,26 +40,29 @@ further improvements are very welcome.}
   \stepcounter{IndentLevel}
 }
 
-\NewDocumentCommand\DRow{m}{
+\NewDocumentCommand\DRow{}{
   \Repeat{\value{IndentLevel}}{&}
-  #1
-  \\
 }
 
 \NewDocumentCommand\DPullback{m m m m m m g g}{
-  \DRow{\JONpbk #1 & \rTo_{#7} & #2}
-  \DRow{\dTo^{#8} & & \dTo_{#5}}
-  \DRow{#3 & \rTo^{#6} & #4}
+  \DRow \JONpbk{#1} & \rTo_{#7} & #2
+  \\
+  \DRow \dTo^{#8} & & \dTo_{#5}
+  \\
+  \DRow #3 & \rTo^{#6} & #4
 }
 
 
 \begin{figure}[h!]
   \begin{diagram}
-    \DRow{U}
+    \DRow U
+    \\
     \DBlock
-    \DRow{\rdDotsto~{(x,y)}\rdTo(4,2)^x\rdTo(2,4)_y}
+    \DRow \rdDotsto~{(x,y)}\rdTo(4,2)^x\rdTo(2,4)_y
+    \\
     \DBlock
     \DPullback{X\times_Z Y}{Y}{X}{Z}{f}{g}{p}{q}
+    \\
   \end{diagram}
   \caption{An example diagram.}
 \end{figure}
